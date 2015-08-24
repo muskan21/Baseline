@@ -32,16 +32,17 @@ public class BaselineApp {
                         if(flag==2) break;
                         if(flag==0 && det.matches("[0-9]+")) {
                             qty=Integer.parseInt(det);
-                            System.out.println(det);
+                            //System.out.println(det);
                             flag=1;
                         }
-                        else if(flag==1 && det.matches("[0-9]+")) {
+                        else if(flag==1 && det.matches("[0-9]+[.]?[0-9]*")) {
                             price=Double.parseDouble(det);
-                            System.out.println(price);
+                            //System.out.println(price);
                             flag=2;
                         }
                     }
-                    System.out.println(qty);
+                    //System.out.println(qty);
+                    items.add(new Item())
                     break;
             }
         }while(choice != 3);
