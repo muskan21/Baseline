@@ -30,10 +30,12 @@ public class BaselineApp {
                         exempt=true;
                     int qty=0;
                     int flag=0;
-                    int flagn=0;
+                    int flagn=-1;
                     String name=null;
                     double price=0;
-                    for(String det:details.split(" ")) {
+                    String[] dets=details.split(" ");
+                    int i=0;
+                    for(String det:dets) {
                         if(flag==2) break;
                         if(flag==0 && det.matches("[0-9]+")) {
                             qty=Integer.parseInt(det);
@@ -48,23 +50,43 @@ public class BaselineApp {
                             }
                             if(flagn==1) {
                                 name = det;
-                                flagn = 2;
+                                flagn = (dets.length)+4;
                                 //System.out.println(name);
                             }
-                            if(flag==1 && det.matches("of")) {
-                                flagn = 1;
+                            if(flag==1 && flagn != 2 && det.matches("of")) {
+                                flagn=1;
+                            }
+                            if(flag==1 && flagn != 2 && det.matches("at")) {
+                                flagn = i;
                             }
                         }
+                        i++;
                     }
-                    //System.out.println(qty);
+                    i=1;
+                    if(flagn != dets.length+4 && flagn != -1) {
+                        while(i<flagn)
+                            name = name+dets[i--];
+                    }
+                    System.out.println(name);
                     Item temp = new Item(name,exempt,price,qty,imported);
-                    temp.calculateTax();
+                    double tax=temp.calculateTax();
+                    System.out.println(tax);
                     items.add(temp);
                     break;
 
                 case 2:
+                    printResult(items);
 
             }
         }while(choice != 3);
+    }
+
+    private static void printResult(ArrayList<Item> items) {
+        double s=0;
+        for(Item i:items) {
+            System.out.println(i.getQuantity()+" "+i.getItemName()+" : "+i.getCost());
+            s+=i.getSalexTax();
+        }
+        System.out.println("Salex Tax : "+s);
     }
 }
