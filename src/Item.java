@@ -7,4 +7,5 @@ public class Item {
     private double salesTax;
     private double itemPrice;
     private int quantity;
+    private boolean imported;
 }
