@@ -16,12 +16,19 @@ public class BaselineApp {
             switch(choice) {
                 case 1:
                     System.out.println("Enter item details : ");
-                    String details = input.nextLine();
+                    String details;
+                    System.out.println("Yes");
+                    details = input.nextLine();
+                    System.out.println("Yes");
                     boolean imported;
                     if(details.contains("imported")) {
                         imported=true;
                     }
+                    for(String det:details.split("[1-9]*")) {
+                        System.out.println(det);
+                    }
+                    break;
             }
-        }while(choice != 3)
+        }while(choice != 3);
     }
 }
