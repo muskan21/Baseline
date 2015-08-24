@@ -26,9 +26,20 @@ public class BaselineApp {
                         imported=true;
                     }
                     int qty=0;
+                    int flag=0;
+                    double price=0;
                     for(String det:details.split(" ")) {
-                        if(!det.contains("[a-zA-z]*"))
-                            qty=det;
+                        if(flag==2) break;
+                        if(flag==0 && det.matches("[0-9]+")) {
+                            qty=Integer.parseInt(det);
+                            System.out.println(det);
+                            flag=1;
+                        }
+                        else if(flag==1 && det.matches("[0-9]+")) {
+                            price=Double.parseDouble(det);
+                            System.out.println(price);
+                            flag=2;
+                        }
                     }
                     System.out.println(qty);
                     break;
