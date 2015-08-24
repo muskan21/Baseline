@@ -25,8 +25,13 @@ public class BaselineApp {
                     if(details.contains("imported")) {
                         imported=true;
                     }
+                    boolean exempt;
+                    if(details.contains("book") || details.contains("chocolate") || details.contains("pill"))
+                        exempt=true;
                     int qty=0;
                     int flag=0;
+                    int flagn=0;
+                    String name;
                     double price=0;
                     for(String det:details.split(" ")) {
                         if(flag==2) break;
@@ -35,14 +40,25 @@ public class BaselineApp {
                             //System.out.println(det);
                             flag=1;
                         }
-                        else if(flag==1 && det.matches("[0-9]+[.]?[0-9]*")) {
-                            price=Double.parseDouble(det);
-                            //System.out.println(price);
-                            flag=2;
+                        else {
+                            if (flag == 1 && det.matches("[0-9]+[.]?[0-9]*")) {
+                                price = Double.parseDouble(det);
+                                //System.out.println(price);
+                                flag = 2;
+                            }
+                            if(flagn==1) {
+                                name = det;
+                                flagn = 2;
+                                System.out.println(name);
+                            }
+                            if(flag==1 && det.matches("of")) {
+                                flagn = 1;
+                            }
+
                         }
                     }
                     //System.out.println(qty);
-                    items.add(new Item())
+                    items.add(new Item());
                     break;
             }
         }while(choice != 3);
