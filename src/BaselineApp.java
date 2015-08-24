@@ -17,16 +17,20 @@ public class BaselineApp {
                 case 1:
                     System.out.println("Enter item details : ");
                     String details;
-                    System.out.println("Yes");
-                    details = input.nextLine();
-                    System.out.println("Yes");
+                    //System.out.println("Yes");
+                    Scanner inputs = new Scanner(System.in);
+                    details = inputs.nextLine();
+                    //System.out.println("Yes");
                     boolean imported;
                     if(details.contains("imported")) {
                         imported=true;
                     }
-                    for(String det:details.split("[1-9]*")) {
-                        System.out.println(det);
+                    int qty=0;
+                    for(String det:details.split(" ")) {
+                        if(!det.contains("[a-zA-z]*"))
+                            qty=det;
                     }
+                    System.out.println(qty);
                     break;
             }
         }while(choice != 3);
