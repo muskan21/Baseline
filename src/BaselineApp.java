@@ -53,19 +53,23 @@ public class BaselineApp {
                                 flagn = (dets.length)+4;
                                 //System.out.println(name);
                             }
-                            if(flag==1 && flagn != 2 && det.matches("of")) {
+                            if(flag==1 && flagn != (dets.length)+4 && det.matches("of")) {
                                 flagn=1;
                             }
-                            if(flag==1 && flagn != 2 && det.matches("at")) {
+                            if(flag==1 && flagn != (dets.length)+4 && det.matches("at")) {
                                 flagn = i;
                             }
                         }
                         i++;
                     }
-                    i=1;
-                    if(flagn != dets.length+4 && flagn != -1) {
-                        while(i<flagn)
-                            name = name+dets[i--];
+                    int j=1;
+                    if(flagn != (dets.length)+4 && flagn != -1) {
+                        System.out.println(flagn);
+                        while(j<flagn)
+                            if(name != null)
+                            name = name+" "+dets[j++];
+                            else
+                                name=dets[j++];
                     }
                     System.out.println(name);
                     Item temp = new Item(name,exempt,price,qty,imported);
@@ -76,6 +80,9 @@ public class BaselineApp {
 
                 case 2:
                     printResult(items);
+                    break;
+
+                case 3: break;
 
             }
         }while(choice != 3);
