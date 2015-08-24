@@ -21,17 +21,17 @@ public class BaselineApp {
                     Scanner inputs = new Scanner(System.in);
                     details = inputs.nextLine();
                     //System.out.println("Yes");
-                    boolean imported;
+                    boolean imported=false;
                     if(details.contains("imported")) {
                         imported=true;
                     }
-                    boolean exempt;
+                    boolean exempt=false;
                     if(details.contains("book") || details.contains("chocolate") || details.contains("pill"))
                         exempt=true;
                     int qty=0;
                     int flag=0;
                     int flagn=0;
-                    String name;
+                    String name=null;
                     double price=0;
                     for(String det:details.split(" ")) {
                         if(flag==2) break;
@@ -49,17 +49,21 @@ public class BaselineApp {
                             if(flagn==1) {
                                 name = det;
                                 flagn = 2;
-                                System.out.println(name);
+                                //System.out.println(name);
                             }
                             if(flag==1 && det.matches("of")) {
                                 flagn = 1;
                             }
-
                         }
                     }
                     //System.out.println(qty);
-                    items.add(new Item());
+                    Item temp = new Item(name,exempt,price,qty,imported);
+                    temp.calculateTax();
+                    items.add(temp);
                     break;
+
+                case 2:
+
             }
         }while(choice != 3);
     }
